@@ -1,0 +1,7 @@
+[project]
+name = "cunhado"
+version = "0.1.0"
+description = "Your cuñado thinks he knows everything"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
