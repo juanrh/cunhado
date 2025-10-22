@@ -24,9 +24,18 @@ else
 endif
 
 # https://docs.astral.sh/uv/guides/projects/
+# [Sync the workspace](https://docs.astral.sh/uv/concepts/projects/sync/)
+# so `uv` setups the environment and make the dependencies available to your IDE
+.PHONY: devenv
+devenv:   ### setup developlent environment
+	cd $(MAIN_SRC) && uv sync --all-extras
+
+.PHONY: clean
+clean:	### remove any compiled artifacts
+	rm -rf $(VENV_DIR)
 
 .PHONY: run
 run: export LOTRBOT_ENV_FILE_PATH=$(shell echo $${LOTRBOT_ENV_FILE_PATH:-$(HOME)/.lotrbot.env})
 run: export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
-run:	### Run the agent
-	uv run $(MAIN_SRC)/main.py 
+run:	### run the agent
+	$(PYTHON) $(MAIN_SRC)/main.py 
