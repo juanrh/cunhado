@@ -30,6 +30,52 @@ endif
 devenv:   ### setup developlent environment
 	uv sync --all-extras
 
+.PHONY: install-dev
+install-dev:	### install development dependencies
+	uv sync --extra dev
+
 .PHONY: clean
-clean:	### remove any compiled artifacts
+clean: clean/typecheck	### remove any compiled artifacts
 	rm -rf $(VENV_DIR)
+
+.PHONY: release
+release: devenv checks
+
+.PHONY: checks
+checks: typecheck lint format test	### run all checks (linters, tests, etc)
+checks:
+	echo
+	echo "All checks passing"
+
+.PHONY: lint
+lint:	### run ruff linting
+	echo
+	echo "Running ruff linter ..."
+	uv run ruff check $(MAIN_SRC)
+
+.PHONY: format
+format:	### run ruff formatting
+	echo
+	echo "Running formatting checks ..."
+	uv run ruff format $(MAIN_SRC)
+
+.PHONY: typecheck
+typecheck:	### run mypy type checking
+	echo
+	echo "Running type checking ..."
+	uv run mypy --config-file $(ROOT_DIR)/pyproject.toml .
+
+.PHONY: clean/typecheck
+clean/typecheck:
+	rm -rf $(MAIN_SRC)/.mypy_cache
+
+
+.PHONY: lint/fix
+lint/fix:	### auto-fix linting and formatting issues
+	uv run ruff check --fix $(MAIN_SRC) && uv run ruff format $(MAIN_SRC)
+
+.PHONY: test
+test:	### run all tests
+	echo
+	echo "Running tests ..."
+	echo "No tests for now"
