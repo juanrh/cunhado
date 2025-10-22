@@ -4,8 +4,7 @@ app = App()
 
 @app.default
 def main():
+    """
+    Your cuñado thinks he's an expert on everything
+    """
     print("Hello from cunhado!")
-
-
-if __name__ == "__main__":
-    app()

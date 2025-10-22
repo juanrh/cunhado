@@ -5,7 +5,7 @@ SHELL := /bin/bash
 UNAME := $(shell uname)
 ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 MAIN_SRC := $(ROOT_DIR)/cunhado
-VENV_DIR := $(MAIN_SRC)/.venv
+VENV_DIR := $(ROOT_DIR)/.venv
 PYTHON := $(VENV_DIR)/bin/python
 
 default: help
@@ -28,14 +28,8 @@ endif
 # so `uv` setups the environment and make the dependencies available to your IDE
 .PHONY: devenv
 devenv:   ### setup developlent environment
-	cd $(MAIN_SRC) && uv sync --all-extras
+	uv sync --all-extras
 
 .PHONY: clean
 clean:	### remove any compiled artifacts
 	rm -rf $(VENV_DIR)
-
-.PHONY: run
-run: export LOTRBOT_ENV_FILE_PATH=$(shell echo $${LOTRBOT_ENV_FILE_PATH:-$(HOME)/.lotrbot.env})
-run: export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
-run:	### run the agent
-	$(PYTHON) $(MAIN_SRC)/main.py 

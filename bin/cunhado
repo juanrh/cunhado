@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -eu
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+CUNHADO_ROOT="${SCRIPT_DIR}/.."
+
+ls "${CUNHADO_ROOT}/.venv" &> /dev/null || make -C "${CUNHADO_ROOT}" devenv
+
+"${CUNHADO_ROOT}/.venv/bin/python" -u "${CUNHADO_ROOT}/main.py" "$@"
