@@ -29,7 +29,7 @@ dev = [
 requires-dist = [
     { name = "cyclopts", specifier = ">=4.0.0" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.1.0" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.14.0" },
 ]
 provides-extras = ["dev"]
 
