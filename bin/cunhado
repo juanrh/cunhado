@@ -7,4 +7,4 @@ CUNHADO_ROOT="${SCRIPT_DIR}/.."
 
 ls "${CUNHADO_ROOT}/.venv" &> /dev/null || make -C "${CUNHADO_ROOT}" devenv
 
-"${CUNHADO_ROOT}/.venv/bin/python" -u "${CUNHADO_ROOT}/main.py" "$@"
+"${CUNHADO_ROOT}/.venv/bin/python" -u "${CUNHADO_ROOT}/src/main.py" "$@"

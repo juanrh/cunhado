@@ -4,7 +4,7 @@ SHELL := /bin/bash
 
 UNAME := $(shell uname)
 ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-MAIN_SRC := $(ROOT_DIR)/cunhado
+MAIN_SRC := $(ROOT_DIR)/src/cunhado
 VENV_DIR := $(ROOT_DIR)/.venv
 PYTHON := $(VENV_DIR)/bin/python
 
@@ -78,4 +78,5 @@ lint/fix:	### auto-fix linting and formatting issues
 test:	### run all tests
 	echo
 	echo "Running tests ..."
-	echo "No tests for now"
+	uv run pytest --pyargs tests
+
