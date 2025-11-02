@@ -8,8 +8,9 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic_yaml import parse_yaml_raw_as
 
-_CUNHADO_HOME = Path(os.environ["HOME"])
-_DEFAULT_SECRETS_FILE = _CUNHADO_HOME / ".cunhado_secrets"
+_CUNHADO_HOME = Path(os.environ["HOME"]) / ".cunhado"
+_DEFAULT_SECRETS_FILE = _CUNHADO_HOME / "secrets.env"
+_DEFAULT_SETTINGS_FILE = _CUNHADO_HOME / "settings.yaml"
 
 
 class Secrets(BaseSettings):
@@ -67,3 +68,12 @@ def get_settings_from_yaml(path: Path) -> Settings:
         yaml_content = f.read()
     return parse_yaml_raw_as(Settings, yaml_content)
 
+
+def get_config(
+    secrets_env_file: Path = _DEFAULT_SECRETS_FILE,
+    settings_file: Path = _DEFAULT_SETTINGS_FILE,
+) -> Config:
+    return Config(
+        secrets=get_secrets(secrets_env_file),
+        settings=get_settings_from_yaml(settings_file),
+    )

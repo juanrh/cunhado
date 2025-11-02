@@ -1,8 +1,6 @@
-from pathlib import Path
-
 from cyclopts import App
 
-from cunhado.config import get_secrets
+from cunhado.config import get_config
 
 app = App()
 
@@ -12,6 +10,8 @@ def main():
     """
     Your cuñado thinks he's an expert on everything
     """
-    secrets = get_secrets(env_file=Path("cunhado_secrets.env.example"))
-    print(secrets)
+    config = get_config()
+    # TODO:  use logger
+    # TODO: add args for secrets and settings
+    print(config)
     print("Hello from cunhado!")
