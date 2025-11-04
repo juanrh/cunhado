@@ -1,1 +1,4 @@
 model_provider: openrouter
+log_level: INFO
+log_dir: /home/juanrh/.cunhado
+log_filename: cunhado.log

@@ -15,7 +15,8 @@ def main():
     """
     config = get_config()
     # TODO: add args for secrets and settings
-    setup_logging(config)
+    config = setup_logging(config)
+    print(f"Using log file '{config.log_file}'")
     log = logging.getLogger(__name__)
     log.info(f"Using config: '{config}'")
     log.info("Hello from cunhado!")
