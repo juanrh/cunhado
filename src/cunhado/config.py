@@ -38,6 +38,10 @@ class ModelProvider(str, Enum):
 class Settings(BaseSettings):
     """Application settings."""
 
+    log_level: str = "INFO"
+    log_dir: str = str(_CUNHADO_HOME)
+    log_filename: str = "cunhado.log"
+
     model_provider: ModelProvider = Field(
         description="The model provider to use (mistral or openrouter)"
     )
